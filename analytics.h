@@ -28,7 +28,7 @@ void setPointersToVector(vector <Major *> &p, vector <Major> &v);
 double getValue(Major pointers, int input);
 void printMenu();
 void collectValidInput(int &input);
-void sortPointers(vector <Major *> & pointers, vector<Major> & majors,int input);
+void sortPointers(vector <Major *> & pointers, int input);
 void printPointers(vector <Major *> & pointers,int input);
 void specificMajor(vector <Major> &v);
 

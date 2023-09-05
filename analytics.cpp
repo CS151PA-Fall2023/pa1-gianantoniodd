@@ -1,9 +1,10 @@
 #include "analytics.h"
 using namespace std;
 /**
- * @brief 
+ * @brief takes file object and creates and inserts Major objects to vector of majors
  * 
- * @param v 
+ * @param v vector of majors passed by reference
+ * @param file file to read from
  */
 
 void readFileIntoVector(vector<Major> &v, ifstream & file)
@@ -50,6 +51,12 @@ void readFileIntoVector(vector<Major> &v, ifstream & file)
         if (file.peek() == EOF) break;
     }
 }
+/**
+ * @brief creates object pointers and points each to its corosponding structure
+ * 
+ * @param p vector of pointers pointing to structs 
+ * @param v vector of Major objects to be pointed at
+ */
 void setPointersToVector(vector <Major *> &p, vector <Major> &v)
 {
     for (long unsigned int i = 0; i < v.size(); i++)
@@ -59,6 +66,15 @@ void setPointersToVector(vector <Major *> &p, vector <Major> &v)
         p.push_back(tmpptr);
     }
 }
+/**
+ * @brief based on the choice of the user program must sort based on diferent values of the
+ * struct. this funct acts as a look up table that returns the correct value for the sort and
+ * display functions.
+ * 
+ * @param pointers pointer to object
+ * @param input determines what member variable to return
+ * @return double return
+ */
 double getValue(Major pointers, int input)
 {
     if ((input == 1) || (input == 2)) return pointers.mean;
@@ -68,6 +84,10 @@ double getValue(Major pointers, int input)
     if ((input == 9) || (input == 10)) return pointers.percentageMale;
     return -1;
 }
+/**
+ * @brief Prints main menu
+ * 
+ */
 void printMenu()
 {
 cout << "2015 National Survey of Recent College Graduate\n";
@@ -85,9 +105,12 @@ cout << "11. Display Information for a Specific Major\n";
 cout << "12. Exit\n";
 cout << "\n";
 cout << "Select a Menu: _";
-
-
 }
+/**
+ * @brief gathers user input and makes sure its an int between 1 and 12
+ * 
+ * @param input 
+ */
 void collectValidInput(int &input)
 {
     cin >> input;
@@ -100,7 +123,13 @@ void collectValidInput(int &input)
     }
 
 }
-void sortPointers(vector <Major *> & pointers, vector<Major> & majors, int input)
+/**
+ * @brief sorts array of pointers based on value of input.
+ * 
+ * @param pointers array of pointers 
+ * @param input determines what member var to sort by and increasing or decreasing
+ */
+void sortPointers(vector <Major *> & pointers, int input)
 {
     bool sorted;
     do
@@ -141,6 +170,12 @@ void sortPointers(vector <Major *> & pointers, vector<Major> & majors, int input
 
 
 }
+/**
+ * @brief prints sorted information
+ * 
+ * @param pointers references to the objects printed
+ * @param input used to tell what member variable was sorted and wich to present
+ */
 void printPointers(vector <Major *> & pointers,int input)
 {
     string sortBy[] = {"mean salary","median salary","# of asian", 
@@ -157,6 +192,12 @@ void printPointers(vector <Major *> & pointers,int input)
 
 
 }
+/**
+ * @brief gathers name from user and looks for it in the vector, displays information about
+ * specific major.
+ * 
+ * @param v vector of major structs
+ */
 void specificMajor(vector <Major> &v)
 {
     cout << "enter major (case sensitive): ";

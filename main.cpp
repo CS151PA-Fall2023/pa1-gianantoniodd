@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author David Durrant
+ * @brief Presents cvs file to user so they can view sorted information
+ * @version 0.1
+ * @date 2023-09-04
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "analytics.h"
 using namespace std;
 
@@ -8,6 +18,7 @@ int main()
     ifstream file;
     file.open("graduates2015.csv");
     readFileIntoVector(majors, file);
+    file.close();
     vector <Major *> pointers;
     setPointersToVector(pointers, majors);
     int input = -1;
@@ -26,7 +37,7 @@ int main()
         }
 
 
-        sortPointers(pointers, majors, input);
+        sortPointers(pointers, input);
         printPointers(pointers, input);
         cin.ignore();
         cin.get();
